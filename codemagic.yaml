@@ -1,0 +1,47 @@
+workflows:
+  android-debug:
+    name: SpesaMix Android APK
+    max_build_duration: 60
+    environment:
+      flutter: stable
+    scripts:
+      - name: Generate Android project files
+        script: |
+          cp lib/main.dart /tmp/spesamix_main.dart
+          cp pubspec.yaml /tmp/spesamix_pubspec.yaml
+          rm -rf android
+          flutter create . --platforms=android --org com.spesamix --project-name spesamix
+          cp /tmp/spesamix_main.dart lib/main.dart
+          cp /tmp/spesamix_pubspec.yaml pubspec.yaml
+      - name: Install Flutter packages
+        script: |
+          flutter pub get
+      - name: Build debug APK
+        script: |
+          flutter build apk --debug
+    artifacts:
+      - build/app/outputs/flutter-apk/app-debug.apk
+
+  ios-simulator:
+    name: SpesaMix iOS Simulator
+    max_build_duration: 60
+    instance_type: mac_mini_m2
+    environment:
+      flutter: stable
+    scripts:
+      - name: Generate iOS project files
+        script: |
+          cp lib/main.dart /tmp/spesamix_main.dart
+          cp pubspec.yaml /tmp/spesamix_pubspec.yaml
+          rm -rf ios
+          flutter create . --platforms=ios --org com.spesamix --project-name spesamix
+          cp /tmp/spesamix_main.dart lib/main.dart
+          cp /tmp/spesamix_pubspec.yaml pubspec.yaml
+      - name: Install Flutter packages
+        script: |
+          flutter pub get
+      - name: Build iOS simulator app
+        script: |
+          flutter build ios --debug --simulator
+    artifacts:
+      - build/ios/iphonesimulator/Runner.app

@@ -1,49 +1,15 @@
-# SpesaMix
+# SpesaMix - Codemagic ready
 
-App Flutter per Android e iPhone che permette di inserire prodotti acquistati e visualizzare la percentuale di:
+Questa versione e' preparata per Codemagic.
 
-- Bibite
-- Cibo salato
-- Cibo dolce
+## Android APK
+1. Carica TUTTI i file di questa cartella nella root del repository GitHub `spesamix`.
+2. In Codemagic apri l'app e premi **Check for configuration files**.
+3. Seleziona il workflow **SpesaMix Android APK** (`android-debug`).
+4. Avvia la build.
+5. A build completata scarica `app-debug.apk` dagli Artifacts.
 
-## Funzioni
-
-- Inserimento nome prodotto
-- Scelta categoria
-- Quantità e unità (pz, g, kg, ml, l)
-- Calcolo automatico delle percentuali
-- Grafico a torta
-- Salvataggio locale sul telefono
-- Eliminazione singoli prodotti
-- Azzeramento dello storico
-
-## Avvio
-
-1. Installa Flutter: https://docs.flutter.dev/get-started/install
-2. Apri un terminale nella cartella del progetto.
-3. Esegui:
-
-```bash
-flutter pub get
-flutter run
-```
-
-## Creare APK Android
-
-```bash
-flutter build apk --release
-```
-
-L'APK verrà creato normalmente in:
-
-`build/app/outputs/flutter-apk/app-release.apk`
+Il workflow genera automaticamente la cartella Android corretta usando la versione Flutter installata su Codemagic, poi compila l'APK.
 
 ## iPhone
-
-Su macOS con Xcode installato:
-
-```bash
-flutter build ios --release
-```
-
-Per installare l'app su iPhone serve firmarla con un account Apple tramite Xcode. Per distribuirla ad altri utenti si usa normalmente TestFlight o App Store.
+E' incluso anche un workflow per il simulatore iOS. Per installare l'app su un iPhone fisico serve la firma Apple (Apple Developer / provisioning profile) e una build IPA firmata.
